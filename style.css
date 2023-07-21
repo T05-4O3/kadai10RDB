@@ -1,0 +1,275 @@
+@charset "utf-8";
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css');
+
+
+html{
+  font-size: 62.5%;/* 16px × 62.5% = 10px*/
+  scroll-behavior: smooth;
+}
+body{
+  color: #222222;
+  font-family:"Open Sans",'ヒラギノ角ゴ ProN W3', Hiragino Kaku Gothic ProN, "メイリオ", Meiryo, sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.75em;
+  justify-content: center;
+  background: radial-gradient(ellipse at top, yellowgreen  0%, darken(yellowgreen, 20%) 100%);
+  background-repeat: no-repeat;
+}
+#header {
+  text-align: center;
+  padding: 2rem;
+}
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  letter-spacing: 1em;
+}
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* login */
+.admin_menu {
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+.login_status {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.login {
+  padding: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* コマパネルのコンテナ */
+.comic-panes {
+  padding: 1rem;
+}
+.comic-pane__1 {
+  position: relative;
+  width: 300px;
+  height: auto;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black; /* 追加 */
+}
+.comic-image {
+  max-width: 100%;
+  max-height: 100%;
+}
+img[src=""] {
+  display: none;
+}
+img:not([src]) {
+  display: none;
+}
+
+/* user search box */
+.user-search.search_container {
+  display: flex;
+  margin: 0 auto;
+  margin-top: 3rem;
+}
+.search_container {
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid #999;
+  padding: 3px 10px;
+  height: 2.1em;
+  width: 25rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+.search_container input[type="text"] {
+  border: none;
+  height: 2.0em;
+  flex: 1;
+  text-align: left;
+}
+.search_container input[type="text"]:focus {
+  outline: 0;
+}
+.search_container button {
+  cursor: pointer;
+  font-family: FontAwesome;
+  font-size: 1.3em;
+  border: none;
+  background: none;
+  color: #3879D9;
+  position: absolute;
+  width: 2.5em;
+  height: 2.5em;
+  right: 0;
+  top: -10px;
+  outline: none;
+  padding: 0;
+  display: block;
+  text-align: center;
+  line-height: 2.5em;
+}
+
+
+#share-buttons {
+  padding: 1rem;
+}
+
+.share {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  position: relative;
+  display:inline-block;
+  width: 100px;
+  height: 100px;
+  line-height:100px;
+  text-align:center;
+  margin:0 auto;  
+}
+
+.circle {
+  fill: none;
+  stroke: #222222;
+  stroke-width:5px;
+  stroke-dasharray: 40; 
+  transition: all .2s ease-in-out;
+  animation: outWaveOut 1s cubic-bezier(0.42, 0.0, 0.58, 1.0) forwards;
+}
+
+.social {
+  color:#222222;
+  font-size:1.8em;    
+  position: absolute;
+  top:0px;
+  left:0px;
+  width: 100%;
+  height: 100%;    
+  transition: all .5s ease-in-out;
+}
+
+.container:hover {
+  cursor:pointer;   
+}
+
+.container:hover .circle {
+  fill:#ffffff;
+  fill-opacity:1;      
+  animation: outWaveIn 1s cubic-bezier(0.42, 0.0, 0.58, 1.0) forwards;
+}
+
+.download:hover .circle {
+  animation-name: colorDownload, outWaveIn;
+}
+
+.twitter:hover .circle {
+  animation-name: colorTwitter, outWaveIn;
+}
+
+.facebook:hover .circle {
+  animation-name: colorFacebook, outWaveIn;
+}
+
+@keyframes colorDownload {
+  from {stroke: #222222;}
+  to {stroke:#feae00;}
+}
+
+@keyframes colorTwitter {
+  from {stroke: #222222;}
+  to {stroke:#3aaae1;}
+}
+
+@keyframes colorFacebook {
+  from {stroke: #222222;}
+  to {stroke:#3b5998;}
+}
+
+@keyframes outWaveIn {
+  to {
+    stroke-width:10px;
+    stroke-dasharray: 400;    
+  }
+}
+@keyframes outWaveOut {
+  from {
+    stroke-width:10px;
+    stroke-dasharray: 400;
+  }
+  to {
+    stroke: #222222;
+    stroke-width:5px;
+    stroke-dasharray: 40; 
+  }
+}
+
+/* 管理画面 */
+.keyword-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left; /* キーワード配置 */
+}
+
+.keyword-container p {
+  width: 20%;
+  text-align: left; /* キーワード配置 */
+  padding: 0.5rem; /* キーワード間のスペース */
+  box-sizing: border-box; /* paddingを幅に含む */
+  line-height: 1.5; /* 行の高さ */
+  margin: 0;
+}
+
+/* Pagination links */
+.pagination {
+  display: flex;
+  justify-content: center; /* ページネーション配置 */
+  margin-top: 1rem; /* 上の余白 */
+}
+
+.pagination a {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  color: #222222;
+  border: 1px solid #222222;
+  margin: 0 0.3rem; /* ページネーションリンクの間隔 */
+}
+
+.pagination a:hover {
+  background-color: #222222;
+  color: #ffffff;
+}
+
+.add_keyword-container {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: center;
+}
+
+.add_keyword-container input[type="text"] {
+  font-size: 1.5rem; /* フォントの大きさを調整 */
+  padding: 0.5rem; /* 入力ボックスの内側の余白 */
+}
+
+
+#footer {
+  text-align: center;
+  padding: 2rem;
+}
+
+@media (max-width: 767px) {
+  #header h1 {
+    font-size: 6vw;
+  }
+  #footer p {
+    font-size: 3vw;
+  }
+}
