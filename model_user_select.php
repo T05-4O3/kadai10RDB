@@ -7,13 +7,22 @@ class User {
     public $adminFlag;
     public $lifeFlag;
 
-    public function __construct($id, $name, $loginId, $password, $adminFlag, $lifeFlag) {
+    public function __construct($id = null, $name = null, $loginId = null, $password = null, $adminFlag = null, $lifeFlag = null) {
         $this->id = $id;
         $this->name = $name;
         $this->loginId = $loginId;
         $this->password = $password;
         $this->adminFlag = $adminFlag;
         $this->lifeFlag = $lifeFlag;
+    }
+
+    // ユーザー情報を取得する静的メソッド
+    public static function getAllUsers($pdo) {
+        $stmt = $pdo->prepare('SELECT * FROM oneframe_user');
+        $stmt->execute();
+        $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        // var_dump($users); // デバッグ用
+        return $users;
     }
 
     // ユーザーの情報を更新するメソッド
@@ -41,13 +50,24 @@ class User {
     }
 }
 
-// DBから全てのユーザー情報を取得する関数
-function getAllUsers($pdo) {
-    $stmt = $pdo->prepare('SELECT id, name, lid, lpw, admin_flg, life_flg FROM oneframe_user');
-    $stmt->execute();
-    $users = array();
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $users[] = new User($row['id'], $row['name'], $row['lid'], $row['lpw'], $row['admin_flg'], $row['life_flg']);
-    }
-    return $users;
+function addUser($pdo, $name, $loginId, $password, $adminFlag, $lifeFlag) {
+    $stmt = $pdo->prepare('INSERT INTO users (name, loginId, password, adminFlag, lifeFlag) VALUES (?, ?, ?, ?, ?)');
+    $stmt->execute([$name, $loginId, $password, $adminFlag, $lifeFlag]);
+}
+
+function deleteUser($pdo, $id) {
+    $stmt = $pdo->prepare('DELETE FROM users WHERE id = ?');
+    $stmt->execute([$id]);
+}
+
+function updateLifeFlag($pdo, $id, $lifeFlag) {
+    $stmt = $pdo->prepare('UPDATE users SET lifeFlag = ? WHERE id = ?');
+    $stmt->execute([$lifeFlag, $id]);
+}
+
+// ページネーションのための $totalPages 変数を計算する関数を追加
+function calculateTotalPages($users, $usersPerPage) {
+    $totalUsers = count($users); // 総ユーザー数
+    $totalPages = ceil($totalUsers / $usersPerPage); // 総ページ数を計算
+    return $totalPages;
 }
